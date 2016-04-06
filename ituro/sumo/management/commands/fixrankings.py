@@ -13,11 +13,11 @@ class Command(BaseCommand):
                 if robot.order == 0:
                     rivals_check = SumoGroupTeam.objects.filter(group=robot.group,
                                                             average=robot.average,
-                                                            point=robot.point).exists()
+                                                            point=robot.point).exclude(id=robot.id).exists()
                     if rivals_check:
                         rivals = SumoGroupTeam.objects.filter(group=robot.group,
                                                               average=robot.average,
-                                                              point=robot.point)
+                                                              point=robot.point).exclude(id=robot.id)
                         rival_count = rivals.count()
                         if rival_count == 1:
                             rival = rivals.first()
@@ -32,7 +32,7 @@ class Command(BaseCommand):
                         order += 1
         for group in SumoGroup.objects.all():
             for robot in SumoGroupTeam.objects.filter(group=group):
-                print "{}-{}-{}-{}".format(robot.order,robot,robot.point,
+                print "{} {} {} {}".format(robot.order,robot.robot.name,robot.point,
                                         robot.average)
 
 
