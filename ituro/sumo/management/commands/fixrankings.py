@@ -32,7 +32,7 @@ class Command(BaseCommand):
                         order += 1
         for group in SumoGroup.objects.all():
             for robot in SumoGroupTeam.objects.filter(group=group):
-                print "{} {} {} {}".format(robot.order,robot.robot.name,robot.point,
+                print "{} {} {} {}".format(robot.order,robot.robot,robot.point,
                                         robot.average)
 
 
